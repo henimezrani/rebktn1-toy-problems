@@ -7,5 +7,20 @@
  */
 
 var firstNonRepeatedCharacter = function(string) {
-  // TODO: your solution here
+	var result;
+	var obj = {};
+
+  for (var i = 0 ; i < string.length ; i++) {
+  	if (obj[string[i]] === undefined){
+  		obj[string[i]] = true;
+  	} else if (obj[string[i]]) {
+  		obj[string[i]] = false;
+  	}
+  }
+  for (var i = 0 ; i < string.length ; i++) {
+  	if (obj[string[i]]) {
+  		return string[i];
+  	}
+  }
+  return "All characters are repeated";
 };
