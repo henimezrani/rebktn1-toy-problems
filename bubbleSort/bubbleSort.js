@@ -33,6 +33,27 @@
 // Feel free to add helper functions if needed.
 
 
+// V1 using only 2 loops from 0 to n
+// V2 using is sorted boolean inside the 1st loop changing state in second loop
+// V3 neglect last element by decreasing iterations of the second loop by one
+// Time complexity: n squared
+
 var bubbleSort = function(array) {
-  // Your code here.
+	var length = array.length
+  for (var i = 0 ; i < array.length ; i++) {
+  	var isSorted = true;
+  	for (var j = 0 ; j < length; j++) {
+  		if (array[j]>array[j+1]) {
+  			[array[j],array[j+1]] = [array[j+1],array[j]]
+  			isSorted = false;
+  		}
+  	}
+  	if (isSorted){
+  		return array;
+  	}
+  	length--;
+  }
+  return array;
 };
+
+//	V2
