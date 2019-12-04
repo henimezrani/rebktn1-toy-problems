@@ -32,24 +32,7 @@ function dec2FactString(nb, base) {
 	return multiplier.toString() + dec2FactString(newNumber, base-1)
 }
 
-//-------------------------
-
-//	V1
-// 	Wrong but perfectly working V1, I thought you need to convert the input number into a string base 36, not the opposite
-
-// function factString2Dec(nb) {
-// 	if (nb === 0) {
-// 		return '0'
-// 	}
-// 	var base = base || findMaxBase(nb);
-// 	var multiplier = findMultiplier (nb, base);
-// 	var newNumber = nb - (multiplier*calculateFactorial(base))
-
-// 	return convertMultiplier(multiplier) + dec2FactString(newNumber, base-1)
-// }
-
-//	V2
-//	Solved
+//	V1: Solution solved
 
 function factString2Dec(str) {
 	var result = 0;
@@ -58,6 +41,22 @@ function factString2Dec(str) {
 	}
 	return result;
 }
+
+
+//	V2: Not what the problem asks to solve, but this is what I understood in the beginning.
+//	Converts the number to base 36 factorial product
+
+function factString2DecV2(nb) {
+	if (nb === 0) {
+		return '0'
+	}
+	var base = base || findMaxBase(nb);
+	var multiplier = findMultiplier (nb, base);
+	var newNumber = nb - (multiplier*calculateFactorial(base))
+
+	return convertMultiplier(multiplier) + dec2FactString(newNumber, base-1)
+}
+
 
 // --------------------------
 
@@ -97,7 +96,7 @@ function convertMultiplier(multiplier) {
 
 function convertStrToNb(char) {
 	if (isNaN(parseInt(char))) {
-		return char.charCodeAt(0) - 55;
+		return char.toUpperCase().charCodeAt(0) - 55;
 	} else {
 		return parseInt(char);
 	}
