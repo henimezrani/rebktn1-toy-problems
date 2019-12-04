@@ -21,3 +21,81 @@
 // The second one will decode a string with a factorial representation and produce the decimal representation : factString2Dec(str).
 
 // Given numbers will be positive.
+
+function dec2FactString(nb, base) {
+	if (nb === 0) {
+		return '0'
+	}
+	var base = base || findMaxBase(nb);
+	var multiplier = findMultiplier (nb, base);
+	var newNumber = nb - (multiplier*calculateFactorial(base))
+	return multiplier.toString() + dec2FactString(newNumber, base-1)
+}
+
+//-------------------------
+
+//	V1
+// 	Wrong but perfectly working V1, I thought you need to convert the input number into a string base 36, not the opposite
+
+function factString2Dec(nb) {
+	if (nb === 0) {
+		return '0'
+	}
+	var base = base || findMaxBase(nb);
+	var multiplier = findMultiplier (nb, base);
+	var newNumber = nb - (multiplier*calculateFactorial(base))
+
+	return convertMultiplier(multiplier) + dec2FactString(newNumber, base-1)
+}
+
+//	V2
+//	Not done yet
+
+function factString2Dec(str) {
+	var result = 0;
+	for (var i = str.length - 1 ; i >= 1 ; i--) {
+		result += convertStrToNb(str[i]) * calculateFactorial(i)
+	}
+	return result;
+}
+
+// --------------------------
+
+function calculateFactorial(number) {
+	if (number === 1) {
+		return 1;
+	}
+	return number * calculateFactorial(number-1)
+}
+
+function findMaxBase(number) {
+	var result = 1;
+	while ( calculateFactorial(result) <= number) {
+		result ++;
+	}
+	return --result;
+}
+
+function findMultiplier (number, base) {
+	var multiplier = 0
+	while ( multiplier * calculateFactorial(base) <= number) {
+		multiplier ++;
+	}
+	return --multiplier;
+}
+
+function convertMultiplier(multiplier) {
+	if (multiplier>=10){
+		var code = 55 + multiplier
+		return String.fromCharCode(code);
+	}
+	return multiplier.toString();
+}
+
+function convertStrToNb(char) {
+	if (isNaN(parseInt(char))) {
+		return char.charCodeAt(0) - 55;
+	} else {
+		return parseInt(char);
+	}
+}
