@@ -23,7 +23,7 @@
 // Given numbers will be positive.
 
 function dec2FactString(nb, base) {
-	if (nb === 0) {
+	if (base === 0) {
 		return '0'
 	}
 	var base = base || findMaxBase(nb);
@@ -37,24 +37,24 @@ function dec2FactString(nb, base) {
 //	V1
 // 	Wrong but perfectly working V1, I thought you need to convert the input number into a string base 36, not the opposite
 
-function factString2Dec(nb) {
-	if (nb === 0) {
-		return '0'
-	}
-	var base = base || findMaxBase(nb);
-	var multiplier = findMultiplier (nb, base);
-	var newNumber = nb - (multiplier*calculateFactorial(base))
+// function factString2Dec(nb) {
+// 	if (nb === 0) {
+// 		return '0'
+// 	}
+// 	var base = base || findMaxBase(nb);
+// 	var multiplier = findMultiplier (nb, base);
+// 	var newNumber = nb - (multiplier*calculateFactorial(base))
 
-	return convertMultiplier(multiplier) + dec2FactString(newNumber, base-1)
-}
+// 	return convertMultiplier(multiplier) + dec2FactString(newNumber, base-1)
+// }
 
 //	V2
 //	Not done yet
 
 function factString2Dec(str) {
 	var result = 0;
-	for (var i = 0 ; i < str.length-1 ; i++) {
-		result += convertStrToNb(str[i]) * calculateFactorial(str.length-1)
+	for (var i = 0 ; i < str.length ; i++) {
+		result += convertStrToNb(str[i]) * calculateFactorial(str.length-1-i)
 	}
 	return result;
 }
@@ -62,6 +62,9 @@ function factString2Dec(str) {
 // --------------------------
 
 function calculateFactorial(number) {
+	if (number === 0) {
+		return 0;
+	}
 	if (number === 1) {
 		return 1;
 	}
