@@ -53,8 +53,8 @@ function factString2Dec(nb) {
 
 function factString2Dec(str) {
 	var result = 0;
-	for (var i = str.length - 1 ; i >= 1 ; i--) {
-		result += convertStrToNb(str[i]) * calculateFactorial(i)
+	for (var i = 0 ; i < str.length-1 ; i++) {
+		result += convertStrToNb(str[i]) * calculateFactorial(str.length-1)
 	}
 	return result;
 }
