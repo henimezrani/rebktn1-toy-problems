@@ -49,7 +49,7 @@ function dec2FactString(nb, base) {
 // }
 
 //	V2
-//	Not done yet
+//	Solved
 
 function factString2Dec(str) {
 	var result = 0;
