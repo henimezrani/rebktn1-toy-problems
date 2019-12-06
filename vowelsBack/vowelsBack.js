@@ -20,23 +20,34 @@ var exceptions = {
 	'd': 3,
 	'e': 4
 }
+var OriginalAlphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 
-function vowelsBack(string) {
-	var array = string.split('');
-	for (var i = 0 ; i < array.length; i++) {
-		if (consonants9Forward.indexOf(array[i]) >=0) {
-			move(array, i, 9, 'forward')
-		} else if (vowels5Back.indexOf(array[i]) >=0) {
-			move(array, i, 5, 'back')
+function generateNewAlphabet() {
+	var newAlphabet = OriginalAlphabet.map(x => x);
+	for (var i = 0 ; i < 26; i++) {
+		console.log(newAlphabet.length)
+		if (consonants9Forward.indexOf(newAlphabet[i]) >=0) {
+			move(newAlphabet, i, 9, 'forward')
+		} else if (vowels5Back.indexOf(newAlphabet[i]) >=0) {
+			move(newAlphabet, i, 5, 'back')
 		} else {
-			move(array, i, exceptions[string[i]], 'back')
+			move(newAlphabet, i, exceptions[newAlphabet[i]], 'back')
 		}
 	}
+	for (var i = 0 ; i < newAlphabet.length; i++) {
+		if (exceptions[newAlphabet[i]]) {
+			newAlphabet[i] = OriginalAlphabet[i]
+		}
+	}
+	return newAlphabet;
 }
 
 function move(array, index, iterations, direction){
 	if (direction === 'forward') {
 		for (var i = index; i < index+iterations ; i++) {
+			if (i === array.length-1) {
+				[array[i],array[i+1-array.length]] = [array[i+1-array.length],array[i]]
+			}
 			if (i >= array.length) {
 				[array[i-array.length],array[i+1-array.length]] = [array[i+1-array.length],array[i-array.length]]
 			} else {
@@ -45,12 +56,24 @@ function move(array, index, iterations, direction){
 		}
 	} else {
 		for (var i = index; i > index-iterations ; i--) {
-			if (i < 0) {
+			if (i === 0) {
+				[array[i], array[i-1+array.length]] = [array[i-1+array.length], array[i]]
+			} else if (i < 0) {
 				[array[i+array.length],array[i-1+array.length]] = [array[i-1+array.length],array[i+array.length]]
 			} else {
 				[array[i],array[i-1]] = [array[i-1],array[i]]
 			}
 		}
 	}
+
+	return array
+}
+
+function vowelBack(string) {
+	var newAlphabet = generateNewAlphabet()
+	for (var i =0 ; i < string.length ; i++) {
+		string[i] = newAlphabet[OriginalAlphabet.indexOf(string[i])]
+	}
+	return string;
 }
 
