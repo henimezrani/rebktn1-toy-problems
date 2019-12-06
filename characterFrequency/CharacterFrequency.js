@@ -28,5 +28,6 @@ function characterFrequency(string) {
 	result.sort(function(a,b) {
 		return b[1]-a[1];
 	})
+
 	return result;
 }
