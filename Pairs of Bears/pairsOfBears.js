@@ -20,3 +20,18 @@ x will always be a positive integer, and s will never be empty
 
 
 */
+
+
+function pairsOfBairs(x, string) {
+	var resultStr = "";
+	for (var i = 0; i < string.length -1 ; i++) {
+		if ((string[i] === 'B' && string[i+1] === '8') || (string[i] === '8' && string[i+1] === 'B')) {
+			resultStr += string[i] + string[i+1]
+			i++;
+		}
+	}
+	if (x < resultStr.length*2) {
+		return [resultStr, false]
+	}
+	return [resultStr, true];
+}
