@@ -5,21 +5,32 @@ You need to merge them into a new binary tree. The merge rule is that if two nod
 
 Example 1:
 
-Input: 
-	Tree 1                     Tree 2                  
-          1                         2                             
-         / \                       / \                            
-        3   2                     1   3                        
-       /                           \   \                      
-      5                             4   7                  
-Output: 
+var t1 = new TreeNode(1);
+t1.left = new TreeNode(3);
+t1.left.left = new TreeNode(5);
+t1.right = new TreeNode(2);
+
+var t2 = new TreeNode(2);
+t2.left = new TreeNode(1);
+t2.left.right = new TreeNode(4);
+t2.right = new TreeNode(3);
+t2.right.right = new TreeNode(3);
+
+Input:
+	Tree 1                     Tree 2
+          1                         2
+         / \                       / \
+        3   2                     1   3
+       /                           \   \
+      5                             4   7
+Output:
 Merged tree:
 	     3
 	    / \
 	   4   5
-	  / \   \ 
+	  / \   \
 	 5   4   7
- 
+
 
 Note: The merging process must start from the root nodes of both trees.
 */
@@ -36,4 +47,29 @@ Note: The merging process must start from the root nodes of both trees.
  * @param {TreeNode} t2
  * @return {TreeNode}
  */
-var mergeTrees = function(t1, t2) {};
+
+function 	TreeNode(value){
+	this.value = value;
+	this.left = null;
+	this.right = null;
+}
+
+var mergeTrees = function(t1, t2) { // Problem handling property of undefined
+	if (t1 && t2){
+		var result = TreeNode(t1.value + t2.value)
+		result.left = mergeTrees(t1.left, t2.left)
+		result.right = mergeTrees(t1.right, t2.right)
+	} else if (t1) {
+		var result = TreeNode(t1.value)
+		result.left = mergeTrees(t1.left, null)
+		result.right = mergeTrees(t1.right, null)
+	} else if (t2) {
+		var result = TreeNode(t2.value)
+		result.left = mergeTrees(null, t2.left)
+		result.right = mergeTrees(null, t2.right)
+	} else {
+		return null
+	}
+
+	return result;
+};
