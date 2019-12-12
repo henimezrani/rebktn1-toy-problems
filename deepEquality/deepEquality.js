@@ -12,4 +12,39 @@
   *
   */
 var deepEquals = function(apple, orange) {
+  if (typeof apple === typeof orange) { // exit from the very beginning if they dont have the same type
+
+    // Checking on arrays
+    if (Array.isArray(apple)) {
+      if (apple.length !== orange.length){ // False if different lengths
+        return false;
+      }
+      for (var i = 0; i < apple.length;  i++) { // for each element of the array, do the same function for the value contained
+        if (!deepEquals(apple[i], orange[i])){ // If not equal, return false
+          return false;
+        }
+      }
+      return true; // If they reach here, the values in the array are equal
+
+
+    // Checking on objects  
+    } else if (typeof apple === "object"){
+      if (Object.keys(apple).length !== Object.keys(orange).length){ // False if different lengths
+        return false;
+      }
+      for (var key in apple) { // for each element of the object, do the same function for the value contained
+        if (!deepEquals(apple[key],orange[key])){ // If not equal, return false
+          return false;
+        }
+      }
+      return true; // If they reach here, the values in the objects are equal
+    } else {
+      if (apple === orange) { // Checks other values (Numbers, strings and booleans for truth test used for objects and arrays)
+        return true;
+      }
+      return false;
+    }
+  } else {
+    return false;
+  }
 };
