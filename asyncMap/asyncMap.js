@@ -37,6 +37,18 @@
  *
  */
 
+function asyncMap(tasks, callback) {
+  var results = [];
+  var complete = 0
+  tasks.forEach( (task , i) => {
+    task( (arguments) => {
 
-var asyncMap = function(tasks, callback) {
-};
+      results[i] = arguments;
+      complete ++;
+      if (complete === tasks.length) {
+        callback(results);
+
+      }
+    })
+  })
+}
