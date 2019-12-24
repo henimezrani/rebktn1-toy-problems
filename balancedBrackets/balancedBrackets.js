@@ -9,4 +9,40 @@ isBalanced("(50)(") // false
 isBalanced("[{]}") // false
 */
 
-var isBalanced = function(str) {};
+var isBalanced = function(str) {
+  var stack = [];
+  for (var i = 0 ; i < str.length ; i++) {
+    switch(str[i]) {
+      case '(':
+        stack.push('(')
+        break;
+      case '[':
+        stack.push('[')
+        break;
+      case '{':
+        stack.push('{')
+        break;
+      case ')':
+        if (stack.pop() !== '('){
+          return false;
+        }
+        break;
+      case ']':
+        if (stack.pop() !== '['){
+          return false;
+        }
+        break;
+      case '}':
+        if (stack.pop() !== '{'){
+          return false;
+        }
+        break;
+    }
+  }
+  if (stack.length > 0) {
+      return false;
+  }
+  return true;
+
+}
+
