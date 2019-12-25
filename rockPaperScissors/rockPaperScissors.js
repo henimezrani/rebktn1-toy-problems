@@ -18,7 +18,15 @@
 *
 */
 
-var rockPaperScissors = function (
-) {
-  // TODO: your solution here
+var rockPaperScissors = function (n) {
+  var result = []
+  var combinations = Math.pow(3,n);
+  for (var i = 0 ; i < combinations ; i++ ){
+    result[i] = i.toString(3).toString()
+    result[i] = result[i].replace(/0/g,'R')
+    result[i] = result[i].replace(/1/g,'P')
+    result[i] = result[i].replace(/2/g,'S')
+  }
+  return result;
+
 };
