@@ -28,5 +28,4 @@ var rockPaperScissors = function (n) {
     result[i] = result[i].replace(/2/g,'S')
   }
   return result;
-
 };

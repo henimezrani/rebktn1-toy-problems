@@ -12,6 +12,25 @@
   * console.log(anagrams); // [ 'abc', 'acb', 'bac', 'bca', 'cab', 'cba' ]
   */
 
-var allAnagrams = function(string) {
-  // Your code here.
+  // Factorial complexity
+
+var allAnagrams = function(string, res, currentWord) {
+  var chars = string.split('');
+  var result = result || []
+  var currentWord = currentWord || ''
+
+
+  for (var i = 0 ; i < chars.length ; i++) {
+    currentWord += chars[i]
+    if (chars.length === 1) {
+      console.log(currentWord)
+      result.push(currentWord)
+    } else {
+      chars.slice(0,i).concat(chars.slice(i+1)).join('')
+      allAnagrams(chars.slice(0,i).concat(chars.slice(i+1)).join(''), result, currentWord)
+    }
+
+  }
+
+  return result
 };
