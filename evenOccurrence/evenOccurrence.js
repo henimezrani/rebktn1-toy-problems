@@ -11,14 +11,11 @@ evenOccurrence([{a: 1, b: 2}, {a:1, b:3}, {a:1, b:2}]) // {a:1, b:2}
 function evenOccurrence (array) {
   storageObj = {};
   for (var i = 0 ; i < array.length ; i++) {
-    console.log("array element is " + array[i])
     if (storageObj[JSON.stringify([array[i]])] === undefined){
       storageObj[JSON.stringify([array[i]])] = false;
     } else {
       storageObj[JSON.stringify([array[i]])] = !storageObj[JSON.stringify([array[i]])];
     }
-    console.log(storageObj[JSON.stringify([array[i]])])
-    console.log(storageObj)
   }
 
 
