@@ -14,15 +14,47 @@
 // Input: -1->5->3->4->0
 // Output: -1->0->3->4->5
 
-/**
- * Definition for singly-linked list.
- * function ListNode(val) {
- *     this.val = val;
- *     this.next = null;
- * }
- */
+
+// Definition for singly-linked list.
+function ListNode(val) {
+    this.val = val;
+    this.next = null;
+}
+
 /**
  * @param {ListNode} head
  * @return {ListNode}
  */
-var insertionSortList = function(head) {};
+var insertionSortList = function(head) {
+  var currentNode = head.next
+  while(currentNode.next) {
+    var sortedNode = head
+    while(sortedNode !== currentNode) {
+      console.log(sortedNode, currentNode)
+      if (currentNode.val < sortedNode.val){
+        currentNode.next = sortedNode.next
+        sortedNode.next = currentNode
+      }
+      sortedNode = sortedNode.next
+    }
+    currentNode = currentNode.next
+  }
+  return head
+};
+
+var head = {
+  val: 1,
+  next: {
+    val: 5,
+    next: {
+      val: 3,
+      next: {
+        val: 4,
+        next: {
+          val: 0,
+          next: null
+        }
+      }
+    }
+  }
+}
