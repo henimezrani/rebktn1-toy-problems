@@ -28,5 +28,28 @@ function Node(val) {
 }
 
 var hasCycle = function(linkedList) {
-  // your code here...
+  var p1 = linkedList
+  var p2 = linkedList
+
+  while (p1.next) {
+    p1 = p1.next
+    p2 = p2.next.next
+    if (p1 === p2) {
+      return true
+    }
+  }
+  return false
+
 };
+
+var a = Node(1);
+var b = Node(2);
+var c = Node(3);
+var d = Node(4);
+var e = Node(5);
+
+a.next = b
+b.next = c
+c.next = d
+d.next = e
+e.next = b
