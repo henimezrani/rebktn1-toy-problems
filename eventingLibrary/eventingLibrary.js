@@ -14,17 +14,30 @@ Caveats:
   • It is not necessary to write a way to remove listeners.
 */
 
-var mixEvents = function (obj) {
-    // your code here...
-    var events = {};
+const mixEvents = function (obj) {
+  // your code here...
+  let events = {};
+  obj.trigger = function (event) {
+      events[event]();
+  };
 
-    obj.trigger = function (event) {
-        // your code here...
-    };
-
-    // Register a callback to be fired on this event.
-    obj.on = function (event, callback) {
-        // your code here...
-    };
-    return obj;
+  // Register a callback to be fired on this event.
+  obj.on = function (event, callback) {
+      if(!(typeof event) !== 'string'){
+          return new Error("Event name has to be a string");
+      }
+      if(!(typeof callback) !==  'function'){
+          return new Error("Event name has to be a string");
+      }
+      events[event] = callback;
+      console.log(events)
+  };
+  return obj;
 };
+
+const obj = mixEvents({name: 'Alice', age: 30});
+
+obj.on('ageChange', function(){ // On takes an event name and a callback function // so this register a function //
+  console.log('Age changed');
+});
+

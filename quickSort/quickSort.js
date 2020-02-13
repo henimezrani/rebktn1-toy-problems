@@ -23,6 +23,42 @@ Extra Credit: Perform the sort in place. Watch how at https://www.youtube.com/wa
 NOTE: DO NOT use JavaScript’s built-in sorting function (Array.prototype.sort).
 */
 
-function quickSort(arr) {
-  // your code here...
+var items = [5, 3, 7, 6, 2, 9];
+function swap(items, leftIndex, rightIndex) {
+  var temp = items[leftIndex];
+  items[leftIndex] = items[rightIndex];
+  items[rightIndex] = temp;
+}
+function partition(items, left, right) {
+  var pivot = items[Math.floor((right + left) / 2)];
+  var i = left;
+  var j = right;
+  while (i <= j) {
+    while (items[i] < pivot) {
+      i++;
+    }
+    while (items[j] > pivot) {
+      j--;
+    }
+    if (i <= j) {
+      swap(items, i, j);
+      i++;
+      j--;
+    }
+  }
+  return i;
+}
+
+function quickSort(arr, left, right) {
+  var index;
+  if (arr.length > 1) {
+    index = partition(arr, left, right);
+    if (left < index - 1) {
+      quickSort(arr, left, index - 1);
+    }
+    if (index < right) {
+      quickSort(arr, index, right);
+    }
+  }
+  return arr;
 }
